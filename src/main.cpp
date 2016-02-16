@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <locale>
 #include <codecvt>
 #include <fcntl.h>
@@ -44,7 +45,10 @@ void readJabas(std::vector<JabaInfo>& jabas, const std::string& fileName)
 
         if (line[0] == '*') {
             jabas.push_back(info);
+            info.mainNakkis.clear();
+            info.secondaryNakkis.clear();
             r = 0;
+            continue;
         }
         else if (line[0] == '&') {
             secondary = true;
@@ -54,7 +58,7 @@ void readJabas(std::vector<JabaInfo>& jabas, const std::string& fileName)
         case 0:     info.name = line;               break;
         case 1:     info.tg = line;                 break;
         case 2:     info.irc = line;                break;
-        case 3:     info.imageFileName = line;      break;
+        case 3:     info.imageFileName = L"res/" + line;      break;
         default:
         if (secondary)
             info.secondaryNakkis.push_back(line);
@@ -76,10 +80,8 @@ void renderString(sf::RenderTexture& tex, sf::Font& font, const wstring& str, in
 
         int s = 100;
         text.setCharacterSize(s);
-        while (text.getLocalBounds().height > fitInto) {
-            printf("%0.2f\n",text.getLocalBounds().height);
+        while (text.getLocalBounds().height > fitInto)
             text.setCharacterSize(--s);
-        }
 
         text.setString(sf::String(str));
         text.setColor(sf::Color::White);
@@ -116,7 +118,7 @@ void render(sf::RenderTexture& tex, sf::Font& font, const JabaInfo& info) {
     if (info.irc.size() == 0)
         ++nSpaces;
 
-    bool shrinkSecondary = nSpaces < info.secondaryNakkis.size();
+    bool shrinkSecondary = (unsigned)nSpaces < info.secondaryNakkis.size();
 
     if (shrinkSecondary) {
         for (int i=0; i<nSpaces; ++i)
@@ -146,22 +148,82 @@ void render(sf::RenderTexture& tex, sf::Font& font, const JabaInfo& info) {
     }
 }
 
+sf::Image resizeImage(sf::Image& srcImg, float width, float height) {
+    sf::Image image;
+    image.create(width, height);
+    auto s = srcImg.getSize();
+    float xs = width/s.x;
+    float ys = height/s.y;
+
+    for (auto y=0u; y<height; ++y) {
+        for (auto x=0u; x<width; ++x) {
+            image.setPixel(x, y, srcImg.getPixel(x*xs, y*ys));
+        }
+    }
+
+    printf("%f %f\n", xs, ys);
+    return image;
+}
+
 int main(void) {
     std::vector<JabaInfo> jabas;
-    readJabas(jabas, "jabat.txt");
+    readJabas(jabas, "res/jabat.txt");
 
     sf::Font font;
     font.loadFromFile("courbd.ttf");
 
-    sf::RenderTexture destTex;
-    destTex.create(3300, 2100);
-    destTex.clear(sf::Color::Black);
-    render(destTex, font, jabas[0]);
+    sf::Image borderImg;
+    borderImg.loadFromFile("border.png");
+    sf::Image crtmaskImg;
+    crtmaskImg.loadFromFile("crtmask.png");
 
-    sf::Image destImg;
-    destImg = destTex.getTexture().copyToImage();
-    destImg.flipVertically();
-    destImg.saveToFile("test.png");
+    for (auto& jaba : jabas) {
+        sf::RenderTexture destTex;
+        destTex.create(3300, 2100);
+        destTex.clear(sf::Color::Black);
+        render(destTex, font, jaba);
+
+        sf::Image destImg;
+        destImg = destTex.getTexture().copyToImage();
+        destImg.flipVertically();
+
+        sf::Image jabaImg;
+        jabaImg.loadFromFile(sf::String(jaba.imageFileName));
+        auto s = jabaImg.getSize();
+        float jr = (float)s.x/(float)s.y;
+        int jabaSizeX = 0, jabaSizeY = 0;
+        if (jr >= 1100.0f/1600.0f) {
+            jabaImg = resizeImage(jabaImg, 1600.0f*jr, 1600.0);
+            jabaSizeX = 1600.0f*jr;
+            jabaSizeY = 1600;
+        }
+        else {
+            jabaImg = resizeImage(jabaImg, 1100.0f, 1100.0f/jr);
+            jabaSizeX = 1100.0f;
+            jabaSizeY = 1100.0f/jr;
+        }
+
+        for (auto y=0; y<2100; ++y) {
+            for (auto x=0; x<3300; ++x) {
+                auto p = destImg.getPixel(x, y);
+                auto pBorder = borderImg.getPixel(x, y);
+                auto pCrtmask = crtmaskImg.getPixel(x, y);
+                auto jabaX = x-800+(jabaSizeX/2);
+                auto jabaY = y-250;
+                sf::Color pJaba = sf::Color::Black;
+                if (jabaY >= 0 && jabaY < jabaSizeY && jabaX >= 0 && jabaX < jabaSizeX)
+                    pJaba = jabaImg.getPixel(jabaX, jabaY);
+
+                destImg.setPixel(x, y, pJaba);
+                if (pBorder.a > 0)
+                    destImg.setPixel(x, y, (pBorder + p)*pCrtmask);
+            }
+        }
+
+        std::basic_stringstream<wchar_t> ss;
+        ss << jaba.name << L".png";
+        destImg.saveToFile(sf::String(ss.str()));
+    }
 
     return 0;
 }
