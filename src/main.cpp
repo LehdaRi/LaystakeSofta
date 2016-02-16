@@ -72,35 +72,8 @@ void renderString(sf::RenderTexture& tex, sf::Font& font, const wstring& str, in
 
 
 void render(sf::RenderTexture& tex, sf::Font& font, const JabaInfo& info) {
-    const int baseX = 1770;
-    int charX = baseX;
+    int charX = 1770;
     int charY = 572;
-
-    /*renderString(tex, font, L"---------------------", charX, charY);
-    charY += 113; charX = baseX;
-    renderString(tex, font, info.name, charX, charY);
-    charY += 113; charX = baseX;
-    renderString(tex, font, L"---------------------", charX, charY);
-    charY += 113; charX = baseX;
-
-    for (auto& nakki : info.nakkis) {
-        renderString(tex, font, nakki, charX, charY);
-        charY += 113; charX = baseX;
-    }
-
-    charY = 1617; charX = baseX;
-    renderString(tex, font, L"---------------------", charX, charY);
-    charY += 113; charX = baseX;
-
-    wstring tg;
-    tg = L"TG: @" + info.tg;
-    renderString(tex, font, info.tg, charX, charY);
-    charY += 113; charX = baseX;
-
-    wstring irc;
-    tg = L"IRC: " + info.irc;
-    renderString(tex, font, info.irc, charX, charY);*/
-
 
     wstring str;
     str += L"---------------------\n";
