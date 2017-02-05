@@ -9,6 +9,9 @@
 #include <io.h>
 
 
+#define BLEND(C1, C2, B) sf::Color(C1.r+B*(C2.r-C1.r), C1.g+B*(C2.g-C1.g), C1.b+B*(C2.b-C1.b), C1.a+B*(C2.a-C1.a))
+
+
 using namespace std;
 
 
@@ -41,29 +44,46 @@ void readJabas(std::vector<JabaInfo>& jabas, const std::string& fileName)
 
     wifs.imbue(locale(wifs.getloc(), new codecvt_utf8<wchar_t, 0x10ffff, consume_header>()));
     while(getline(wifs, line)) {
-        wcout << ++c << L'\t' << line << L'\n';
+        //wcout << ++c << L'\t' << line << L'\n';
 
         if (line[0] == '*') {
             jabas.push_back(info);
             info.mainNakkis.clear();
             info.secondaryNakkis.clear();
             r = 0;
+            secondary = false;
+            cout << "" << endl;
             continue;
         }
         else if (line[0] == '&') {
             secondary = true;
+            wcout << "Secondary Nakkis:" << endl;
             continue;
         }
         switch(r) {
-        case 0:     info.name = line;               break;
-        case 1:     info.tg = line;                 break;
-        case 2:     info.irc = line;                break;
-        case 3:     info.imageFileName = L"res/" + line;      break;
+        case 0:
+            info.name = line;
+            wcout << info.name << endl;
+        break;
+        case 1:
+            info.tg = line;
+            wcout << "TG: @" << info.tg << endl;
+        break;
+        case 2:
+            info.irc = line;
+            wcout << "IRC: " << info.irc << endl;
+        break;
+        case 3:
+            info.imageFileName = L"res/" + line;
+            wcout << "Main Nakkis:" << endl;
+        break;
         default:
         if (secondary)
             info.secondaryNakkis.push_back(line);
         else
             info.mainNakkis.push_back(line);
+
+        wcout << "  " << line << endl;
         break;
         }
         ++r;
@@ -152,12 +172,31 @@ sf::Image resizeImage(sf::Image& srcImg, float width, float height) {
     sf::Image image;
     image.create(width, height);
     auto s = srcImg.getSize();
-    float xs = width/s.x;
-    float ys = height/s.y;
+    float xs = s.x/width;
+    float ys = s.y/height;
 
-    for (auto y=0u; y<height; ++y) {
-        for (auto x=0u; x<width; ++x) {
-            image.setPixel(x, y, srcImg.getPixel(x*xs, y*ys));
+    for (auto y=0u; y<(unsigned)height; ++y) {
+        for (auto x=0u; x<(unsigned)width; ++x) {
+            float xd = x*xs;
+            float yd = y*ys;
+            int xi = (int)xd;
+            int yi = (int)yd;
+            int xi2 = xi+1;
+            if (xi2 >= s.x) xi2 = xi;
+            int yi2 = yi+1;
+            if (yi2 >= s.y) yi2 = yi;
+            xd -= xi;
+            yd -= yi;
+
+            auto p00 = srcImg.getPixel(xi, yi);
+            auto p10 = srcImg.getPixel(xi2, yi);
+            auto p01 = srcImg.getPixel(xi, yi2);
+            auto p11 = srcImg.getPixel(xi2, yi2);
+
+            auto p0 = BLEND(p00, p10, xd);
+            auto p1 = BLEND(p01, p11, xd);
+
+            image.setPixel(x, y, BLEND(p0, p1, yd));
         }
     }
 
@@ -177,6 +216,11 @@ int main(void) {
     sf::Image crtmaskImg;
     crtmaskImg.loadFromFile("crtmask.png");
 
+    sf::Image combinedImg;
+    combinedImg.create(6600, 4200);
+    int combinedId = 0;
+    int laystakeId=0;
+
     for (auto& jaba : jabas) {
         sf::RenderTexture destTex;
         destTex.create(3300, 2100);
@@ -190,6 +234,7 @@ int main(void) {
         sf::Image jabaImg;
         jabaImg.loadFromFile(sf::String(jaba.imageFileName));
         auto s = jabaImg.getSize();
+
         float jr = (float)s.x/(float)s.y;
         int jabaSizeX = 0, jabaSizeY = 0;
         if (jr >= 1100.0f/1600.0f) {
@@ -214,16 +259,56 @@ int main(void) {
                 if (jabaY >= 0 && jabaY < jabaSizeY && jabaX >= 0 && jabaX < jabaSizeX)
                     pJaba = jabaImg.getPixel(jabaX, jabaY);
 
-                destImg.setPixel(x, y, pJaba);
                 if (pBorder.a > 0)
-                    destImg.setPixel(x, y, (pBorder + p)*pCrtmask);
+                    destImg.setPixel(x, y, BLEND(pJaba, ((pBorder + p)*pCrtmask), (pBorder.a/255.0f)));
+                else
+                    destImg.setPixel(x, y, pJaba);
             }
         }
 
         std::basic_stringstream<wchar_t> ss;
-        ss << jaba.name << L".png";
+        ss << "laystakkeet/" << jaba.name << L".png";
         destImg.saveToFile(sf::String(ss.str()));
+
+        int xx;
+        int yy;
+        switch (laystakeId++) {
+        case 0:
+        {
+            xx = 0;
+            yy = 0;
+            if (combinedId++ > 0) {
+                stringstream ss;
+                ss << "laystakkeet/laystakkeet" << combinedId-1 << ".png";
+                combinedImg.saveToFile(ss.str());
+            }
+        }
+        break;
+        case 1:
+            xx = 3300;
+            yy = 0;
+        break;
+        case 2:
+            xx = 0;
+            yy = 2100;
+        break;
+        case 3:
+            xx = 3300;
+            yy = 2100;
+            laystakeId = 0;
+        break;
+        }
+
+        for (auto jj=0; jj<2100; ++jj) {
+            for (auto ii=0; ii<3300; ++ii) {
+                combinedImg.setPixel(ii+xx, jj+yy, destImg.getPixel(ii, jj));
+            }
+        }
     }
+
+    stringstream ss;
+    ss << "laystakkeet/laystakkeet" << combinedId << ".png";
+    combinedImg.saveToFile(ss.str());
 
     return 0;
 }
