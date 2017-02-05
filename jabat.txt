@@ -1,0 +1,405 @@
+﻿Aapo Oksman
+Eipou
+Ei irkkaa
+aapo_oksman.png
+Ulkosäätäjä
+*
+Aapo Rantala
+Aikadilaatio
+Aikadilaatio
+aapo_rantala.png
+Stimulantti
+Lukkarimestari
+Sininen pelaaja
+*
+Aku Viitanen
+Kuukuna
+
+aku_viitanen.jpg
+ISOpomo	
+Lukkari	
+Web-vastaava
+*
+Antti Mella
+Korianders
+
+antti_mella.jpg
+Bändäri	
+Smurffi
+*
+Antti-Jussi Inkinen
+
+
+antti-jussi_inkinen.jpg
+ASkivahti
+Säätökirjanpitäjä
+*
+Bjarne Boström
+Bjakke	
+Bjakke	
+bjarne_boström.png
+Legopalikka
+*
+Charlotta Alén
+
+
+charlotta_alen.png
+Smurffi
+*
+Eero Santamala
+Santsa
+
+eero_santamala.jpg
+Puheenjohtaja	
+Kultainen toimittaja
+*
+Emilia Nuppumäki
+
+
+emilia_nuppumäki.jpg
+Smurffi
+*
+Hermanni Viljanen
+Hemppa
+
+hermanni_viljanen.png
+Bändäri	
+Smurffi
+*
+Ilkka Malassu
+Ilgsi
+
+ilkka_malassu.jpg
+Opintomestari
+*
+Jonne Kurokallio
+Kurojj
+
+jonne_kurokallio.jpg
+Sihteeri
+*
+Juhana Kekoni
+Keksii
+Keksi
+juhana_kekoni.jpg
+Mediamestari
+Dokumentoija
+&
+Graafikko
+Säätökisälli
+*
+Kaisa Hynynen
+Gaisuli
+
+kaisa_hynynen.jpg
+Emäntä
+*
+Konsta Hölttä
+ksooda
+sooda
+konsta_hölttä.png
+Säätöpomo
+ATK-henkilö
+Dokumentoija
+Web-vastaava
+*
+Konsta Varonen
+noppaed
+
+konsta_varonen.jpg
+JuomanlASkija
+*
+Laura Gröhn
+lapanen
+
+laura_gröhn.png
+Depressantti
+Satunnaisliikkuja
+Seniilisihteeri
+Vihreä Pelaaja
+&
+Toiminnantarkastaja
+*
+Mari Pulkkinen
+
+
+mari_pulkkinen.jpg
+Smurffi
+*
+Matti Ojala
+MatsonWatson
+MatsonWatson
+matti_ojala.jpg
+NAKSauttaja
+Kulttuurikisälli
+ASkivahti
+Kultainen toimittaja
+*
+Miika Lehtimäki
+LehdaRi
+
+miika_lehtimäki.jpg
+Säätömestari
+Graafikko
+*
+Mikael Eriksson
+mixzon
+
+mikael_eriksson.jpg
+Graafikko
+*
+Mikko Kyllönen
+Kyltsi
+
+mikko_kyllönen.png
+Toiminnantarkastaja
+*
+Niilo Metsänen
+Niba
+
+niilo_metsänen.jpg
+SuurPhuksikapteeni
+Kultainen
+päätoimittaja
+Kulttuurikisälli
+*
+Noora Salminen
+norsu
+
+noora_salminen.jpg
+Isäntä
+*
+Noora Vänttinen
+norriska
+norri
+noora_vänttinen.png
+Punainen pelaaja
+Kultainen toimittaja
+Lukkari
+Web-vastaava
+*
+Olli-Pekka Osmala
+Ozmaloid
+
+olli-pekka_osmala.jpg
+ASkimestari
+Varatoiminnan-
+tarkastaja
+*
+Paul Laihonen
+Paulig
+Paulig
+paul_laihonen.jpg
+Kulttuurikisälli
+(Ulkomaankirjeen-
+vaihto)toimittaja
+*
+Petteri Nummela
+Rosvosektori
+
+petteri_nummela.jpg
+Serverihenkilö
+Web-vastaava
+*
+Riikka Nousiainen
+Riigs
+
+riikka_nousiainen.jpg
+Kulttuurikisälli
+Yrityssuhdekisälli
+Smurffi
+*
+Roope Pääkkönen
+Rooipw
+
+roope_pääkkönen.jpg
+Phuksikapteeni
+Lukkari
+*
+Saara Peuhkuri
+
+
+saara_peuhkuri.jpg
+ASkivahti
+Yrityssuhdekisälli
+*
+Salla Autti
+SangriaSalla
+
+salla_autti.jpg
+NAKSauttija
+*
+Sami-Petteri Pukkila
+mylvari
+mylvari
+sami-petteri_pukkila.jpg
+Bittimestari
+ASkivahti
+*
+Sanna Halmkrona
+Sanzkii
+
+sanna_halmkrona.jpg
+Kulttuurimestari
+Bändäri
+NAKSauttaja
+Yrityssuhdekisälli
+*
+Santeri Salmijärvi
+sndels
+
+santeri_salmijärvi.jpg
+Automaatti
+Säätökisälli
+*
+Severi Casserly
+
+
+severi_casserly.jpg
+Smurffi
+*
+Taru Virtanen
+tarude
+
+taru_virtanen.jpg
+Tiedottaja
+Smurffi
+Bändäri
+*
+Titta Saari
+tittzaa
+
+titta_saari.jpg
+Rahastonhoitaja
+Varapuheenjohtaja
+Depressantti
+&
+Ulkoexcuvastaava
+Kulttuurikisälli
+ASkivahti
+NAKSauttaja | Web-vastaava
+*
+Tommi Rantala
+
+
+tommi_rantala.jpg
+Lukkari
+*
+Tuomas Rantataro
+Tuoma
+
+tuomas_rantataro.png
+NAKSauttaja
+Depressantti
+*
+Ville Eronen
+Eronen
+
+ville_eronen.jpg
+Smurffi
+*
+Ville Harmaala
+Harppi
+
+ville_harmaala.jpg
+Dokumentoija
+Informaatti
+Manageri
+*
+Ville Kauhanen
+Kauha
+
+ville_kauhanen.jpg
+Yrityssuhdemestari
+*
+Onni Lampi
+omnez
+omnez
+onni_lampi.jpg
+Herra ISOherra
+Pelimies
+Säätöneuvolavastaava
+Smurffi
+*
+Viet Tran
+vieter
+
+viet_tran.jpg
+&
+Master of International
+Affairs	
+Depressantti
+Sähköpiikkijäbä
+Kulttuurikisälli		
+Säätökisälli
+NAKSauttaja | Web-vastaava
+*
+Mikko Mustonen
+Quaxir
+Quaxir
+mikko_mustonen.png
+Depressantti
+NAKSauttaja
+ATK-henkilö
+Varatoiminnan-
+tarkastaja
+*
+Henry Sanmark
+Densu
+
+henry_sanmark.jpg
+Kultainen toimittaja
+TEKSAS-ranger
+&
+Lukkari
+Depressantti
+Keltainen pelaaja
+Kulttuurikisälli
+Web-vastaava
+*
+Jan Juvonen
+AvaruusSika
+
+jan_juvonen.png
+Jäykkäranne
+*
+Petri Niemelä
+petrinm
+
+petri_niemelä.png
+ASkivahti
+ATK-henkilö
+*
+Marcus Myllyviita
+
+
+marcus_myllyviita.jpg
+Smurffi
+*
+Jaakko Mattila
+TinyWP
+
+jaakko_mattila.jpg
+Senior Master of
+International Affairs
+Kulttuurikisälli
+*
+Julius Lindsberg
+
+
+julius_lindsberg.png
+Smurffi
+*
+Taavi Oja
+Mughur
+
+taavi_oja.jpg
+Graafikko
+Smurffi
+*
+Iina Lindqvist
+
+
+iina_lindqvist.jpg
+Smurffi
+*
